@@ -1,0 +1,42 @@
+﻿data layer notes
+
+need to add the following ef dependencies
+    Microsoft.EntityFrameworkCore
+    Microsoft.EntityFrameworkCore.Design
+
+Database connection string
+    Add connection string to web project -> appsettings.json
+
+    update:
+
+            ...
+            ...
+            ...
+            public void ConfigureServices(IServiceCollection services)
+            {
+                services.AddDbContextPool<CommercialairlinerDbContext>(options => {
+                    options.UseSqlServer(Configuration.GetConnectionString("CommercialAirDb"));
+                });
+            ...
+            ...
+            ...
+
+Add DbContext class
+
+
+list - show available dbcontext:
+    > dotnet ef dbcontext list
+
+info - info about our dbContext
+    > dotnet ef dbcontext info -s
+
+    *** where "-s" points to startup project
+        and the below mew backup one directory into the web directory, which
+        contains our Startup.cs - ConfigureServices()
+
+        "..\apicommercialairliners\apicommercialairliners.web.csproj"
+
+Create migrations for database with (***need to be in the apicommercialairliners.data directory)
+    > dotnet ef
+
+    
