@@ -1,4 +1,5 @@
 using apicommercialair.data;
+using apicommercialair.web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +29,17 @@ namespace apicommercialair.web
             services.AddDbContextPool<CommercialairDbContext>(options => {
                 options.UseSqlServer(Configuration.GetConnectionString("CommercialAirDb"));
             });
+
+            //  Add the database exception filter
+            services.AddDatabaseDeveloperPageExceptionFilter();
+            services.AddSingleton<IFileService, FileService>();
+
+            //  ASP.NET Core apps access HttpContext through the IHttpContextAccessor interface and
+            //  its default implementation HttpContextAccessor. We'll be using this in FileService
+            //
+            //  The dependency injection container supplies the IHttpContextAccessor to any classes
+            //  that declare it as a dependency in their constructors
+            services.AddHttpContextAccessor();
 
             services.AddRazorPages();
         }
