@@ -3,6 +3,7 @@
 need to add the following ef dependencies
     Microsoft.EntityFrameworkCore
     Microsoft.EntityFrameworkCore.Design
+    Microsoft.EntityFrameworkCore.SqlServer
 
 Database connection string
     Add connection string to web project -> appsettings.json
@@ -17,26 +18,45 @@ Database connection string
                 services.AddDbContextPool<CommercialairlinerDbContext>(options => {
                     options.UseSqlServer(Configuration.GetConnectionString("CommercialAirDb"));
                 });
+
+                
+            //  Add the database exception filter
+            services.AddDatabaseDeveloperPageExceptionFilter();
             ...
             ...
             ...
+
+The Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore NuGet package provides ASP.NET Core middleware 
+for Entity Framework Core error pages. This middleware helps to detect and diagnose errors with Entity 
+Framework Core migrations.(services.AddDatabaseDeveloperPageExceptionFilter();)
+
+
+
 
 Add DbContext class
 
+***need to be in the apicommercialair.data directory for the below to work
 
 list - show available dbcontext:
     > dotnet ef dbcontext list
 
 info - info about our dbContext
-    > dotnet ef dbcontext info -s
+    > dotnet ef dbcontext info -s ..\apicommercialair.web\apicommercialair.web.csproj
 
     *** where "-s" points to startup project
+
         and the below mew backup one directory into the web directory, which
         contains our Startup.cs - ConfigureServices()
 
-        "..\apicommercialairliners\apicommercialairliners.web.csproj"
+        "..\apicommercialair.web\apicommercialair.web.csproj"
 
-Create migrations for database with (***need to be in the apicommercialairliners.data directory)
-    > dotnet ef
+Create migrations for database with (***need to be in the apicommercialair.data directory)
+    > dotnet ef migrations add initialcreate -s ..\apicommercialair.web\apicommercialair.web.csproj
+
+Update database
+    > dotnet ef database update -s ..\apicommercialair.web\apicommercialair.web.csproj
+
 
     
+We an now scaffold our app
+
