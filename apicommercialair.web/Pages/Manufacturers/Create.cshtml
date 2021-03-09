@@ -5,40 +5,70 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<div class="container-fluid">
+    <h1 class="mt-4">Aircraft Manufacturers</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item">
+            <a asp-area="" asp-page="/Manufacturers/Index">Dashboard</a>
+        </li>
 
-<h4>Manufacturer</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Manufacturer.CompanyName" class="control-label"></label>
-                <input asp-for="Manufacturer.CompanyName" class="form-control" />
-                <span asp-validation-for="Manufacturer.CompanyName" class="text-danger"></span>
+        <li class="breadcrumb-item active">New Manufacturer</li>
+    </ol>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-plus-square"></i>
+            Add a new manufacturer
+        </div>
+        <div class="card-body">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Manufacturer.CompanyName" class="control-label"></label>
+                    <input asp-for="Manufacturer.CompanyName" class="form-control" />
+                    <span asp-validation-for="Manufacturer.CompanyName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Manufacturer.CompanyAddress" class="control-label"></label>
+                    <input asp-for="Manufacturer.CompanyAddress" class="form-control" />
+                    <span asp-validation-for="Manufacturer.CompanyAddress" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Manufacturer.CompanyWebsite" class="control-label"></label>
+                    <input asp-for="Manufacturer.CompanyWebsite" class="form-control" />
+                    <span asp-validation-for="Manufacturer.CompanyWebsite" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Manufacturer.CompanyAbout" class="control-label"></label>
+                    <textarea rows="3" asp-for="Manufacturer.CompanyAbout" class="form-control"></textarea>
+                    <span asp-validation-for="Manufacturer.CompanyAbout" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+
+            <div>
+                <a asp-page="Index">Back to List</a>
             </div>
-            <div class="form-group">
-                <label asp-for="Manufacturer.CompanyAddress" class="control-label"></label>
-                <input asp-for="Manufacturer.CompanyAddress" class="form-control" />
-                <span asp-validation-for="Manufacturer.CompanyAddress" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Manufacturer.CompanyWebsite" class="control-label"></label>
-                <input asp-for="Manufacturer.CompanyWebsite" class="form-control" />
-                <span asp-validation-for="Manufacturer.CompanyWebsite" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
+        <div class="card-footer small text-muted"></div>
     </div>
+
 </div>
 
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
+
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+
+        $(document).ready(function () {
+            $("a#lnk-manufacturer-create").addClass("active");
+            $("a#manufactureres-all").addClass("active");
+            $('#manufactureres-all').click();
+        });
+    </script>
+
 }

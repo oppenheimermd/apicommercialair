@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31025.194
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "apicommercialair.core", "apicommercialair.core\apicommercialair.core.csproj", "{56CE3D3E-6FC3-4C1A-B18C-C12045CE05F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "apicommercialair.core", "apicommercialair.core\apicommercialair.core.csproj", "{56CE3D3E-6FC3-4C1A-B18C-C12045CE05F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "apicommercialair.data", "apicommercialair.data\apicommercialair.data.csproj", "{7882133F-9A3E-4EA0-A1DB-B6B7765A6EC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "apicommercialair.data", "apicommercialair.data\apicommercialair.data.csproj", "{7882133F-9A3E-4EA0-A1DB-B6B7765A6EC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "apicommercialair.web", "apicommercialair.web\apicommercialair.web.csproj", "{7715F8A4-7033-410E-9F6F-80D56775192B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "apicommercialair.web", "apicommercialair.web\apicommercialair.web.csproj", "{7715F8A4-7033-410E-9F6F-80D56775192B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

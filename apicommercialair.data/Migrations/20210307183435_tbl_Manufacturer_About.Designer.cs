@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using apicommercialair.data;
 
 namespace apicommercialair.data.Migrations
 {
     [DbContext(typeof(CommercialairDbContext))]
-    partial class CommercialairDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210307183435_tbl_Manufacturer_About")]
+    partial class tbl_Manufacturer_About
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,12 +30,6 @@ namespace apicommercialair.data.Migrations
 
                     b.Property<int?>("AircraftCategory")
                         .HasColumnType("int");
-
-                    b.Property<DateTime?>("FirstFlight")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("Introduction")
-                        .HasColumnType("datetime2");
 
                     b.Property<int>("ManufacturerId")
                         .HasColumnType("int");

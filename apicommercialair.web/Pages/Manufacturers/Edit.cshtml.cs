@@ -30,7 +30,10 @@ namespace apicommercialair.web.Pages.Manufacturers
                 return NotFound();
             }
 
-            Manufacturer = await _context.Manufacturers.FirstOrDefaultAsync(m => m.Id == id);
+            //  FirstOrDefaultAsync has been replaced with FindAsync.
+            //  When you don't have to include related data, FindAsync is more efficient.
+            Manufacturer = await _context.Manufacturers.FindAsync(id);
+            //Manufacturer = await _context.Manufacturers.FirstOrDefaultAsync(m => m.Id == id);
 
             if (Manufacturer == null)
             {
@@ -41,32 +44,37 @@ namespace apicommercialair.web.Pages.Manufacturers
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int id)
         {
-            if (!ModelState.IsValid)
+            //  Like our create page we need to do some changes
+            //  to prevent overposting
+            //
+            //  The current student is fetched from the database, rather than creating
+            //  an empty student.
+            var manufacturerToUpdate = await _context.Manufacturers.FindAsync(id);
+
+            if (manufacturerToUpdate == null)
             {
-                return Page();
+                return NotFound();
             }
 
-            _context.Attach(Manufacturer).State = EntityState.Modified;
+            //  See note at end of code about EntityState, which was previously
+            //  handeled here
 
-            try
+            if (await TryUpdateModelAsync<Manufacturer>(
+                manufacturerToUpdate,
+                "manufacturer",
+                //  update only the below values
+                m => m.CompanyName,
+                m => m.CompanyAddress,
+                m => m.CompanyWebsite,
+                m => m.CompanyAbout))
             {
                 await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ManufacturerExists(Manufacturer.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return RedirectToPage("./Index");
             }
 
-            return RedirectToPage("./Index");
+            return Page();
         }
 
         private bool ManufacturerExists(int id)
@@ -75,3 +83,15 @@ namespace apicommercialair.web.Pages.Manufacturers
         }
     }
 }
+
+
+/*
+    Entity States
+
+    The database context keeps track of whether entities in memory are in sync with their 
+    corresponding rows in the database. This tracking information determines what happens 
+    when SaveChangesAsync is called. For example, when a new entity is passed to the 
+    AddAsync method, that entity's state is set to Added. When SaveChangesAsync is called, 
+    the database context issues a SQL INSERT command
+ 
+ */

@@ -1,0 +1,75 @@
+﻿@page
+@model apicommercialair.web.Pages.Airplanes.EditModel
+@using apicommercialair.core.Models
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container-fluid">
+    <h1 class="mt-4">Edit @Model.Aircraft.Name</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item">
+            <a asp-area="" asp-page="/Manufacturers/Index">Dashboard</a>
+        </li>
+
+        <li class="breadcrumb-item active">Edit Aircraft</li>
+    </ol>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-edit"></i>
+            Edit @Model.Aircraft.Name
+        </div>
+        <div class="card-body">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Aircraft.Id" />
+                <div class="form-group">
+                    <label asp-for="Aircraft.Name" class="control-label"></label>
+                    <input asp-for="Aircraft.Name" class="form-control" />
+                    <span asp-validation-for="Aircraft.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Aircraft.AircraftCategory" class="control-label"></label>
+                    <select asp-for="Aircraft.AircraftCategory" class="form-control" asp-items="Html.GetEnumSelectList<AircraftCategory>()">
+                    </select>
+                    <span asp-validation-for="Aircraft.AircraftCategory" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Aircraft.FirstFlight" class="control-label"></label>
+                    <input asp-for="Aircraft.FirstFlight" type="date" class="form-control" />
+                    <span asp-validation-for="Aircraft.FirstFlight" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Aircraft.Introduction" class="control-label"></label>
+                    <input asp-for="Aircraft.Introduction" type="date" class="form-control" />
+                    <span asp-validation-for="Aircraft.Introduction" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Aircraft.ManufacturerId" class="control-label"></label>
+                    <select asp-for="Aircraft.ManufacturerId" class="form-control" asp-items="Model.ManufacturersSL">
+                        <option value="">-- Select Manufacture --</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+
+            <div>
+                <a asp-page="./Index">Back to List</a>
+            </div>
+
+        </div>
+        <div class="card-footer small text-muted"></div>
+    </div>
+
+
+    </div>
+
+
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

@@ -5,44 +5,91 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<div class="container-fluid">
+    <h1 class="mt-4">Manufacturers</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item">
+            <a asp-area="" asp-page="/Manufacturers/Index">Dashboard</a>
+        </li>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Manufacturer[0].CompanyName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Manufacturer[0].CompanyAddress)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Manufacturer[0].CompanyWebsite)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Manufacturer) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CompanyName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CompanyAddress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CompanyWebsite)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+        <li class="breadcrumb-item active">All Manufacturers</li>
+    </ol>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-plus-square"></i>
+            All Manufactures
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Manufacturer[0].CompanyName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Manufacturer[0].CompanyAddress)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Manufacturer[0].CompanyWebsite)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Manufacturer[0].CompanyName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Manufacturer[0].CompanyAddress)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Manufacturer[0].CompanyWebsite)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var item in Model.Manufacturer)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CompanyName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CompanyAddress)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CompanyWebsite)
+                                </td>
+                                <td>
+                                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer small text-muted"></div>
+    </div>
+
+</div>
+
+@section Scripts{
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+        $("a#lnk-manufacturer-all").addClass("active");
+        $('#manufactureres-all').click();
+    </script>
 }
-    </tbody>
-</table>
+

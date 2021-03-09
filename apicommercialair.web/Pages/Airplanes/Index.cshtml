@@ -1,0 +1,95 @@
+﻿@page
+@model apicommercialair.web.Pages.Airplanes.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container-fluid">
+    <h1 class="mt-4">Aircraft</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item">
+            <a asp-area="" asp-page="/Manufacturers/Index">Dashboard</a>
+        </li>
+
+        <li class="breadcrumb-item active">All Aircraft</li>
+    </ol>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-plus-square"></i>
+            All Aircraft
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Aircraft[0].Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Aircraft[0].AircraftCategory)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Aircraft[0].Manufacturer)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Aircraft[0].Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Aircraft[0].AircraftCategory)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Aircraft[0].Manufacturer)
+                        </th>
+                        <th></th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model.Aircraft)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AircraftCategory)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Manufacturer.Id)
+                            </td>
+                            <td>
+                                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer small text-muted"></div>
+</div>
+
+@section Scripts{
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+        $("a#aircraft-all").addClass("active");
+        $('#aircraft-all').click();
+    </script>
+}
+
+

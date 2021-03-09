@@ -16,6 +16,10 @@ namespace apicommercialair.core.Models
 
         public AircraftCategory? AircraftCategory { get; set; }
 
+        public DateTime? FirstFlight { get; set; }
+
+        public DateTime? Introduction { get; set; }
+
         //  EF Core interprets a property as a foreign key if it's named <navigation
         //  property name><primary key property name>.
         public int ManufacturerId { get; set; }
