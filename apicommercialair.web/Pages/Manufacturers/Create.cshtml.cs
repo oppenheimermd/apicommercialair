@@ -30,15 +30,27 @@ namespace apicommercialair.web.Pages.Manufacturers
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            //  The scaffolded OnPostAsync code for the Create page is vulnerable to
+            //  overposting. We remedy this with the following code
+            var emptyManufacturer = new Manufacturer();
+
+            if (await TryUpdateModelAsync<Manufacturer>(
+                emptyManufacturer,
+                /* Looks for form fields with a "manufacturer" prefix i.e. Manufacturer.CompanyName. 
+                 * It's not case sensitive.*/
+                "manufacturer", 
+                //  update only the below values
+                m => m.CompanyName, 
+                m => m.CompanyAddress, 
+                m => m.CompanyWebsite, 
+                m => m.CompanyAbout))
             {
-                return Page();
+                _context.Manufacturers.Add(emptyManufacturer);
+                await _context.SaveChangesAsync();
+                return Redirect("./Index");
             }
 
-            _context.Manufacturers.Add(Manufacturer);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
+            return Page();
         }
     }
 }

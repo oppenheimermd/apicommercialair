@@ -1,4 +1,9 @@
-﻿data layer notes
+﻿Layout theme based on
+    https://startbootstrap.com/template/sb-admin
+    https://startbootstrap.com/previews/sb-admin
+    https://github.com/StartBootstrap/startbootstrap-sb-admin
+
+data layer notes
 
 need to add the following ef dependencies
     Microsoft.EntityFrameworkCore
@@ -60,3 +65,7 @@ Update database
     
 We an now scaffold our app
 
+
+
+LINKS
+    https://docs.microsoft.com/en-us/aspnet/core/data/ef-rp/crud?view=aspnetcore-5.0

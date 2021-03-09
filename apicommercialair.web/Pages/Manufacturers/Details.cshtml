@@ -5,33 +5,72 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<div class="container-fluid">
+    <h1 class="mt-4">Details for: @Model.Manufacturer.CompanyName</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item">
+            <a asp-area="" asp-page="/Manufacturers/Index">Dashboard</a>
+        </li>
 
-<div>
-    <h4>Manufacturer</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Manufacturer.CompanyName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Manufacturer.CompanyName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Manufacturer.CompanyAddress)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Manufacturer.CompanyAddress)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Manufacturer.CompanyWebsite)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Manufacturer.CompanyWebsite)
-        </dd>
-    </dl>
+        <li class="breadcrumb-item active">@Model.Manufacturer.CompanyName</li>
+    </ol>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fa fa-info-circle" aria-hidden="true"></i>
+            @Model.Manufacturer.CompanyName
+        </div>
+
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Manufacturer.CompanyName)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Manufacturer.CompanyName)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Manufacturer.CompanyAddress)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Manufacturer.CompanyAddress)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Manufacturer.CompanyWebsite)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Manufacturer.CompanyWebsite)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Manufacturer.CompanyAbout)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Manufacturer.CompanyAbout)
+                </dd>
+            </dl>
+            <div>
+                <a asp-page="./Edit" asp-route-id="@Model.Manufacturer.Id">Edit</a> |
+                <a asp-page="./Index">Back to List</a> |
+                <a asp-page="./Index">Aircraft</a>
+            </div>
+        </div>
+
+        <div class="card-footer small text-muted">@Model.Manufacturer.CompanyName</div>
+    </div>
 </div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.Manufacturer.Id">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
-</div>
+
+
+
+@section Scripts {
+    
+    <script>
+
+        $(document).ready(function () {
+            $("a#manufactureres-all").addClass("active");
+            $('#manufactureres-all').click();
+        });
+    </script>
+
+}
+
+
